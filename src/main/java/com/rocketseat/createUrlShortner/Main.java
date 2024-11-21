@@ -8,6 +8,8 @@ import com.amazonaws.services.lambda.runtime.Context;
 import com.amazonaws.services.lambda.runtime.RequestHandler;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.core.type.TypeReference;
+
 
 public class Main implements RequestHandler<Map<String, Object>, Map<String, String>>{
 
@@ -19,7 +21,7 @@ public class Main implements RequestHandler<Map<String, Object>, Map<String, Str
 
         Map<String, String> bodyMap;
         try {
-            bodyMap = objectMapper.readValue(body,Map.class);
+            bodyMap = objectMapper.readValue(body,new TypeReference<Map<String, String>>() {});
         }catch (JsonProcessingException exception){
             throw new RuntimeException("error parsing Json body: " + exception.getMessage(),exception);
         }
