@@ -23,14 +23,18 @@ public class Main implements RequestHandler<Map<String, Object>, Map<String, Str
         }catch (JsonProcessingException exception){
             throw new RuntimeException("error parsing Json body: " + exception.getMessage(),exception);
         }
+        // Placeholder: será utilizado em implementações futuras
+        @SuppressWarnings("unused")
         String originaUrl = bodyMap.get("originaUrl");
+        @SuppressWarnings("unused")
         String expirationTime = bodyMap.get("expirationTime");
 
+        // Gera código curto para a URL
         String shortUrlCode = UUID.randomUUID().toString().substring(0,8);
         Map<String,String> response = new HashMap<>();
         response.put("code",shortUrlCode);
 
-
+        // Retorna resposta
         return response;
     }
 }
